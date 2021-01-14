@@ -6,17 +6,21 @@ import GlobalStyle from './Global/GlobalStyle';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import { UserStorage } from './UserContext';
+
 function App() {
   return (
     <>
-      <GlobalStyle />
       <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" component={Login} />
-        </Switch>
-        <Footer />
+        <UserStorage>
+          <GlobalStyle />
+          <Header />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/login" component={Login} />
+          </Switch>
+          <Footer />
+        </UserStorage>
       </BrowserRouter>
     </>
   );

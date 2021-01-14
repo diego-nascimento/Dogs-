@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {} from './style';
+import {} from './Home.style';
 
 const Home = () => {
   return <div>Pagina Home</div>;

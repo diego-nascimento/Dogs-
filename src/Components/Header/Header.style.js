@@ -22,7 +22,8 @@ export const Logo = styled(Link)`
 
 export const Login = styled(Link)`
   color: #333;
-
+  display: flex;
+  flex-direction: row;
   ::after {
     content: '';
     display: inline-block;
