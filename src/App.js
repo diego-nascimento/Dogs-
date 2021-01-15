@@ -4,7 +4,7 @@ import Home from './Components/Home/Home';
 import Login from './Components/Login/Login/Login';
 import GlobalStyle from './Global/GlobalStyle';
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { UserStorage } from './UserContext';
 
@@ -15,10 +15,10 @@ function App() {
         <UserStorage>
           <GlobalStyle />
           <Header />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login/*" element={<Login />} />
+          </Routes>
           <Footer />
         </UserStorage>
       </BrowserRouter>

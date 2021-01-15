@@ -1,6 +1,7 @@
 import React from 'react';
 import { Token_POST, User_GET, Token_Validate } from './services/Api';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import useAxios from './Hooks/UseAxios';
 
 export const UserContext = React.createContext();
 
@@ -9,9 +10,60 @@ export const UserStorage = ({ children }) => {
   const [login, setLogin] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  const navigate = useHistory();
+  const navigate = useNavigate();
+  const { request } = useAxios();
+
+  async function getUser(token) {
+    setLogin(true);
+    const requestOptions = User_GET(token);
+    console.log(requestOptions);
+    const response = await request(
+      requestOptions.url,
+      requestOptions.method,
+      requestOptions.data,
+      requestOptions.options,
+    );
+    console.log(response);
+    setData(response);
+  }
+
+  async function userLogin(username, password) {
+    try {
+      setError(null);
+      setLoading(true);
+      const requestOptions = Token_POST(username, password);
+      const response = await request(
+        requestOptions.url,
+        requestOptions.method,
+        requestOptions.data,
+        requestOptions.options,
+      );
+      window.localStorage.setItem('token', response.token);
+      await getUser(response.token);
+      navigate('/conta');
+    } catch (error) {
+      setError(error.message);
+      setLogin(false);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const userLogout = React.useCallback(
+    //deslogar
+    function () {
+      navigate('/login');
+      setData(null);
+      setError(null);
+      setLoading(false);
+      setLogin(false);
+      window.localStorage.removeItem('token');
+    },
+    [navigate],
+  );
 
   React.useEffect(() => {
+    //realiza o autoLogin
     async function autoLogin() {
       const token = window.localStorage.getItem('token');
       if (token) {
@@ -19,7 +71,7 @@ export const UserStorage = ({ children }) => {
           setError(null);
           setLoading(true);
           const response = await Token_Validate(token);
-          if (response.data.ok) throw new Error('Token Invalido');
+          if (response.status !== 200) throw new Error('Token Invalido');
           await getUser(token);
         } catch (error) {
           userLogout();
@@ -30,43 +82,11 @@ export const UserStorage = ({ children }) => {
       }
     }
     autoLogin();
-  }, []);
-
-  async function getUser(token) {
-    const response = await User_GET(token);
-    setData(response.data);
-    setLogin(true);
-    console.log(response.data);
-  }
-
-  async function userLogin(username, password) {
-    try {
-      setError(null);
-      setLoading(true);
-      const response = await Token_POST({ username, password });
-      if (!response.data.token) throw new Error('Error: Usuario Invalido');
-      window.localStorage.setItem('token', response.data.token);
-      await getUser(response.data.token);
-      navigate('/conta');
-    } catch (error) {
-      setError(error.message);
-      setLogin(false);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function userLogout() {
-    setData(null);
-    setError(null);
-    setLoading(false);
-    setLogin(false);
-    window.localStorage.removeItem('token');
-  }
+  }, [userLogout]);
 
   return (
     <UserContext.Provider
-      value={{ userLogin, data, userLogout, error, loading, login }}
+      value={{ userLogin, data, userLogout, error, loading, login, setError }}
     >
       {children}
     </UserContext.Provider>

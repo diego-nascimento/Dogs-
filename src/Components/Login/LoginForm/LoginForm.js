@@ -1,8 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Input from '../../Forms/Input/Input';
 import Button from '../../Forms/Button/Button';
 import useForm from '../../../Hooks/useForm';
+import Error from '../../../Helper/Error';
+
+import {
+  Form,
+  Perdeu,
+  Cadastro,
+  SubTitle,
+  ButtonCriar,
+} from './LoginForm.style';
 
 import { UserContext } from '../../../UserContext';
 
@@ -24,9 +32,9 @@ const LoginForm = (props) => {
   }
 
   return (
-    <section>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <section className="anime-Left">
+      <h1 className="Title">Login</h1>
+      <Form onSubmit={handleSubmit}>
         <Input label="Usuario" type="text" {...username} />
         <Input label="Senha" type="password" name="password" {...password} />
         {loading ? (
@@ -34,9 +42,14 @@ const LoginForm = (props) => {
         ) : (
           <Button>Entrar</Button>
         )}
-        {error && <p>{error}</p>}
-      </form>
-      <Link to="/login/criar">Cadastro</Link>
+        <Error error={error} />
+      </Form>
+      <Perdeu to="/login/perdeu">Perdeu a Senha?</Perdeu>
+      <Cadastro>
+        <SubTitle>Cadastre-se</SubTitle>
+        <p>Ainda não possui conta? Cadaster agora!</p>
+        <ButtonCriar to="/login/criar">Cadastro</ButtonCriar>
+      </Cadastro>
     </section>
   );
 };
