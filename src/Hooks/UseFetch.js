@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 
 const UseAxios = () => {
@@ -6,24 +5,23 @@ const UseAxios = () => {
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(null);
 
-  const request = React.useCallback(async (url, method, data, options) => {
+  const request = React.useCallback(async (url, options) => {
     let response;
+    let json;
     try {
       setError(null);
       setLoading(true);
-      response = await axios({
-        method: method,
-        url: url,
-        data: data,
-        options,
-      });
-      if (response.status !== 200) throw new Error(response.message);
-    } catch (error) {
-      response = null;
+      response = await fetch(url, options);
+      json = response.json();
+      if (response.ok === false) throw new Error('Erro ao cadastrar usuario');
+    } catch (err) {
+      json = null;
+      console.log(err.message);
+      setError(err.message);
     } finally {
-      setData(response.data);
+      setData(json);
       setLoading(false);
-      return response.data;
+      return { response, json };
     }
   }, []);
 

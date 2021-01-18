@@ -5,27 +5,25 @@ import useForm from '../../../Hooks/useForm';
 import { User_Post } from '../../../services/Api';
 import { UserContext } from '../../../UserContext';
 import Error from '../../../Helper/Error';
-import useAxios from '../../../Hooks/UseAxios';
+import useFetch from '../../../Hooks/UseFetch';
 
 const LoginCreate = () => {
   const username = useForm();
   const email = useForm('email');
   const password = useForm();
   const { userLogin } = React.useContext(UserContext);
-  const { loading, error, request } = useAxios();
+  const { loading, error, request } = useFetch();
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await User_Post({
+    const { url, options } = User_Post({
       username: username.value,
       email: email.value,
       password: password.value,
     });
 
-    if (response.status) {
-      userLogin(username.value, password.value);
-    } else {
-    }
+    const { response, json } = await request(url, options);
+    if (response.ok) userLogin(username.value, password.value);
   }
 
   return (

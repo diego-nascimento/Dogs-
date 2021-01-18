@@ -22,12 +22,8 @@ const LoginForm = (props) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    try {
-      if (username.validate() && password.validate()) {
-        userLogin(username.value, password.value);
-      }
-    } catch (error) {
-      alert('Error - ' + error);
+    if (username.validate() && password.validate()) {
+      userLogin(username.value, password.value);
     }
   }
 

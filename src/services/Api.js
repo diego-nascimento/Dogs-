@@ -1,50 +1,51 @@
 const API_URL = 'https://dogsapi.origamid.dev/json';
 
-export function Token_POST(username, password) {
+export function Token_POST(body) {
   return {
     url: `${API_URL}/jwt-auth/v1/token`,
-    method: 'post',
-    data: {
-      username: username,
-      password: password,
-    }, //username, password
     options: {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body), //username e password
+    },
+  };
+}
+
+export function User_GET(token) {
+  return {
+    url: `${API_URL}/api/user`,
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
       },
     },
   };
 }
 
-export function User_GET(data) {
+export function Token_Validate(token) {
   return {
-    method: 'get',
-    url: `${API_URL}/api/user`,
-    headers: {
-      Authorization: 'Bearer ' + data, //token
-    },
-    data: {},
-  };
-}
-
-export async function Token_Validate(data) {
-  return {
-    method: 'post',
     url: `${API_URL}/jwt-auth/v1/token/validate`,
-    headers: {
-      Authorization: 'Bearer ' + data, //token
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     },
-    data, //{}
   };
 }
 
-export async function User_Post(data) {
+export function User_Post(body) {
   return {
-    method: 'post',
     url: `${API_URL}/api/user`,
-    headers: {
-      'Content-Type': 'application/json',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
     },
-    data, //{username, email, password}
   };
 }

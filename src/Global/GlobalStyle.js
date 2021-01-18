@@ -83,6 +83,11 @@ export default createGlobalStyle`
     z-index: -1;
   }
 
+a.active {
+  background: white;
+  box-shadow: 0 0 0 3px #fea;
+  border-color: red;
+}
  
 
 `;
