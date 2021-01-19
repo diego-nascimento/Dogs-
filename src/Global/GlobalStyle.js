@@ -54,6 +54,10 @@ export default createGlobalStyle`
     margin: 0 auto; 
   }
 
+  .mainContainer{
+    margin-top: 4rem;
+  }
+
   .anime-Left{
     opacity: 0;
     transform: translateX(-20px);
@@ -88,6 +92,8 @@ a.active {
   box-shadow: 0 0 0 3px #fea;
   border-color: red;
 }
+
+
  
 
 `;

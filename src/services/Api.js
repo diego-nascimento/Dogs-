@@ -49,3 +49,36 @@ export function User_Post(body) {
     },
   };
 }
+
+export function Photo_Post(formData, token) {
+  return {
+    url: `${API_URL}/api/photo`,
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      body: formData,
+    },
+  };
+}
+
+export function Photos_GET({ page, total, user }) {
+  return {
+    url: `${API_URL}/api/photo/?_page=${page}&total=${total}&_user=${user}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+}
+
+export function Photo_GET(id) {
+  return {
+    url: `${API_URL}/api/photo/${id}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+}

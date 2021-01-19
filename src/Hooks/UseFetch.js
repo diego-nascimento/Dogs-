@@ -12,11 +12,10 @@ const UseAxios = () => {
       setError(null);
       setLoading(true);
       response = await fetch(url, options);
-      json = response.json();
-      if (response.ok === false) throw new Error('Erro ao cadastrar usuario');
+      json = await response.json();
+      if (response.ok === false) throw new Error('Error: Erro ao buscar dados');
     } catch (err) {
       json = null;
-      console.log(err.message);
       setError(err.message);
     } finally {
       setData(json);
