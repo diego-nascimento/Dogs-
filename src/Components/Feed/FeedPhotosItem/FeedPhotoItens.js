@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from '../../../Helper/Image/Image';
 import { Photo } from './FeedPhotoItens.style';
 
 const FeedPhotoItens = (props) => {
@@ -8,7 +9,7 @@ const FeedPhotoItens = (props) => {
 
   return (
     <Photo onClick={handleClick}>
-      <img src={props.photo.src} alt={props.photo.title} />
+      <Image src={props.photo.src} alt={props.photo.title} />
       <span>{props.photo.acessos} acessos</span>
     </Photo>
   );

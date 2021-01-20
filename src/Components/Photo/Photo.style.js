@@ -20,6 +20,7 @@ export const Photo = styled.div`
   opacity: 0;
   transform: scale(0.8);
   animation: ${scaleUP} 0.3s forwards;
+  grid-area: 1/1;
 
   @media (max-width: 64rem) {
     height: auto;

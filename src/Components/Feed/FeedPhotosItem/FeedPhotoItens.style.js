@@ -11,7 +11,7 @@ export const Photo = styled.li`
     display: flex;
   }
 
-  img {
+  > div {
     grid-area: 1/1;
   }
 

@@ -82,3 +82,31 @@ export function Photo_GET(id) {
     },
   };
 }
+
+export function Comment_POST(id, body) {
+  const token = localStorage.getItem('token');
+  return {
+    url: `${API_URL}/api/comment/${id}`,
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function Photo_DELETE(id) {
+  const token = localStorage.getItem('token');
+  return {
+    url: `${API_URL}/api/photo/${id}`,
+    options: {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
