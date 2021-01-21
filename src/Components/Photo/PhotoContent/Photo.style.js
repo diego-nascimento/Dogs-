@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-import visualizacao from '../../Assets/visualizacao-black.svg';
+import visualizacao from '../../../Assets/visualizacao-black.svg';
+import { Link } from 'react-router-dom';
 
 const scaleUP = keyframes`
   to{
@@ -29,7 +30,7 @@ export const Photo = styled.div`
     grid-template-columns: minmax(20rem, 40rem);
   }
 `;
-export const Imagem = styled.div`
+export const Imagem = styled(Link)`
   grid-row: 1/4;
 
   @media (max-width: 64rem) {
@@ -83,4 +84,8 @@ export const Author = styled.p`
   a:hover {
     text-decoration: underline;
   }
+`;
+
+export const Single = styled.div`
+  grid-template-columns: 1fr;
 `;

@@ -83,6 +83,12 @@ export function Photo_GET(id) {
   };
 }
 
+export function Photo_Get(id) {
+  return {
+    url: `${API_URL}/api/photo/${id}`,
+  };
+}
+
 export function Comment_POST(id, body) {
   const token = localStorage.getItem('token');
   return {
@@ -104,6 +110,45 @@ export function Photo_DELETE(id) {
     url: `${API_URL}/api/photo/${id}`,
     options: {
       method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
+
+export function PASSWORD_LOST(body) {
+  return {
+    url: API_URL + '/api/password/lost',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function PASSWORD_RESET(body) {
+  return {
+    url: API_URL + '/api/password/reset',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function GET_STATS() {
+  const token = localStorage.getItem('token');
+  return {
+    url: API_URL + '/api/stats',
+    options: {
+      method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,
       },

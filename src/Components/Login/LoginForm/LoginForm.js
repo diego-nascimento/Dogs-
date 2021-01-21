@@ -11,7 +11,7 @@ import {
   SubTitle,
   ButtonCriar,
 } from './LoginForm.style';
-
+import Head from '../../../Helper/Head';
 import { UserContext } from '../../../UserContext';
 
 const LoginForm = (props) => {
@@ -29,6 +29,7 @@ const LoginForm = (props) => {
 
   return (
     <section className="anime-Left">
+      <Head title="Login" />
       <h1 className="Title">Login</h1>
       <Form onSubmit={handleSubmit}>
         <Input label="Usuario" type="text" {...username} />
@@ -38,7 +39,7 @@ const LoginForm = (props) => {
         ) : (
           <Button>Entrar</Button>
         )}
-        <Error error={error} />
+        <Error error={'Usuario ou Senha Incorretos'} />
       </Form>
       <Perdeu to="/login/perdeu">Perdeu a Senha?</Perdeu>
       <Cadastro>

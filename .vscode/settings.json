@@ -4,7 +4,6 @@
     ".gitignore": true,
     "package.json": false,
     "package-lock.json": true,
-    "public": true,
     "src/testandoAPI": true
   }
 }

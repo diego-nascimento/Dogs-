@@ -93,6 +93,19 @@ a.active {
   border-color: red;
 }
 
+.App{
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh + 10rem)
+}
+
+.AppBody{
+  flex: 1;
+}
+
+.VictoryContainer {
+  height: initial !important;
+}
 
  
 
