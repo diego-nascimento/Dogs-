@@ -30,7 +30,7 @@ const Feed = ({ user }) => {
       window.removeEventListener('wheel', infiniteScroll);
       window.removeEventListener('scroll', infiniteScroll);
     };
-  }, [infinite, pages]);
+  }, [infinite, setInfinite, pages]);
 
   return (
     <div>
