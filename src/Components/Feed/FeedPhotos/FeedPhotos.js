@@ -11,12 +11,13 @@ const FeedPhotos = ({ page, user, setInfinite, ...props }) => {
 
   React.useEffect(() => {
     async function fetchPhotos() {
-      const total = 3;
+      const total = 6;
       const { url, options } = Photos_GET({
         page: page,
         user: user,
         total: total,
       });
+      console.log(url);
       const { response, json } = await request(url, options);
 
       if (response && response.ok && json.length < total) {

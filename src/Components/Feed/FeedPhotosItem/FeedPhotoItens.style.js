@@ -38,10 +38,10 @@ export const Photo = styled.li`
   :nth-child(2) {
     grid-column: 2/4;
     grid-row: span 2;
-  }
 
-  @media (max-width: 40rem) {
-    grid-column: initial;
-    grid-row: initial;
+    @media (max-width: 40rem) {
+      grid-column: initial;
+      grid-row: initial;
+    }
   }
 `;
