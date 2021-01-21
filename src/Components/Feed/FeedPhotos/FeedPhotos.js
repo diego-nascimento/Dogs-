@@ -19,7 +19,7 @@ const FeedPhotos = ({ page, user, setInfinite, ...props }) => {
       });
       const { response, json } = await request(url, options);
 
-      if (response && response.ok && json.lenght < total) {
+      if (response && response.ok && json.length < total) {
         setInfinite(false);
       }
     }
